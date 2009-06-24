@@ -18,15 +18,15 @@
 
 from string import Template
 
-try:
-	import quantities as pq
-except ImportError:
-	print "ERROR - you need the Quantities package which can be found at http://packages.python.org/quantities/"
-	raise
+#try:
+#	import quantities as pq
+#except ImportError:
+#	print "ERROR - you need the Quantities package which can be found at http://packages.python.org/quantities/"
+#	raise
 	
-pq.UnitQuantity('kilocalories', pq.cal*1e3, symbol='kcal')
-pq.UnitQuantity('kilojoules', pq.J*1e3, symbol='kJ')
-pq.UnitQuantity('kilomoles', pq.mol*1e3, symbol='kmol')
+#pq.UnitQuantity('kilocalories', pq.cal*1e3, symbol='kcal')
+#pq.UnitQuantity('kilojoules', pq.J*1e3, symbol='kJ')
+#pq.UnitQuantity('kilomoles', pq.mol*1e3, symbol='kmol')
 
 
 # import all the classes from ctml_writer
@@ -37,8 +37,8 @@ import ctml_writer
 
 
 # define some more quantities units
-_uConc=pq.Quantity(1,ctml_writer._umol) / pq.Quantity(1,ctml_writer._ulen)**3
-_uTime=pq.Quantity(1,ctml_writer._utime)
+#_uConc=pq.Quantity(1,ctml_writer._umol) / pq.Quantity(1,ctml_writer._ulen)**3
+#_uTime=pq.Quantity(1,ctml_writer._utime)
 
 # get the ctml_writer lists into the local namespace
 _species=ctml_writer._species
@@ -161,18 +161,18 @@ if __name__ == "__main__":
 			'upperT': s.getUpperT()
 		 }
 		
-		if s.getLowerT()<298:
-			H= s.getEnthalpy(298)
-			H.units='J/mol' # make sure units are right
-			d['dfH298inJmol'] = float(H) # strip units
-		elif s.getLowerT()<=300:
-			H= s.getEnthalpy(300)
-			H.units='J/mol' # make sure units are right
-			d['dfH298inJmol'] = str(float(H)) + '<!-- polynomials invalid at 298K so this was evaluated at 300K -->' # strip units
-		else:
-			print "polynomials not valid at 298K so can't find standard enthlapy of formation"
-			d['dfH298inJmol'] = '<!-- polynomials invalid at 298K so Hf unknown -->'
-		
+#		if s.getLowerT()<298:
+#			H= s.getEnthalpy(298)
+#			H.units='J/mol' # make sure units are right
+#			d['dfH298inJmol'] = float(H) # strip units
+#		elif s.getLowerT()<=300:
+#			H= s.getEnthalpy(300)
+#			H.units='J/mol' # make sure units are right
+#			d['dfH298inJmol'] = str(float(H)) + '<!-- polynomials invalid at 298K so this was evaluated at 300K -->' # strip units
+#		else:
+#			print "polynomials not valid at 298K so can't find standard enthlapy of formation"
+#			d['dfH298inJmol'] = '<!-- polynomials invalid at 298K so Hf unknown -->'
+		d['dfH298inJmol'] = '*****take this value from manuscript'
 		for i,coeff in enumerate(s.getLowerNasaPoly()._coeffs):
 			d['a%d'%(i+1)] = coeff
 		for i,coeff in enumerate(s.getUpperNasaPoly()._coeffs):
